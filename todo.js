@@ -100,6 +100,34 @@ function todoAjax(id) {
             deleteButton.innerHTML = "Delete";
             let todoID = todo.id
             let todoText = todo.text
+            let checkStatus = todo.completed
+
+
+            var checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.value = 1;
+            checkbox.name = "todo" + todo.id;
+            //check the checkbox 
+            if (checkStatus) {
+                checkbox.checked = true
+            }
+            else {
+                checkbox.checked = false
+            }
+            checkbox.addEventListener("click", function (event) {
+                console.log(checkStatus)
+                if (checkStatus == false) {
+                    checkStatus = true
+                    checkTodo(todoID, checkStatus)
+                }
+                else {
+                    checkStatus = false
+                    checkTodo(todoID, checkStatus)
+
+                }
+            });
+
+
             //deletes it from the list
             deleteButton.addEventListener("click", function (event) {
                 //delete the parent li
@@ -108,6 +136,7 @@ function todoAjax(id) {
             });
 
 
+            li.appendChild(checkbox)
             li.appendChild(deleteButton);
 
             //li.setAttribute("id", "element4");
