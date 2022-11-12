@@ -14,6 +14,36 @@ xhttp.onreadystatechange = function () {
 
             let todoID = todos[i].id
             let todoText = todos[i].text
+            let checkStatus = todos[i].completed
+
+
+            var checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.value = 1;
+            checkbox.name = "todo" + todos[i].id;
+            //check the checkbox 
+            if (checkStatus) {
+                checkbox.checked = true
+            }
+            else {
+                checkbox.checked = false
+            }
+            checkbox.addEventListener("click", function (event) {
+                console.log(checkStatus)
+                if (checkStatus == false) {
+                    checkStatus = true
+                    checkTodo(todoID, checkStatus)
+                }
+                else {
+                    checkStatus = false
+                    checkTodo(todoID, checkStatus)
+
+                }
+            });
+            //todos[i].completed = checkStatus
+
+
+
             //added delete button
             var deleteButton = document.createElement("button");
             deleteButton.innerHTML = "Delete";
@@ -23,6 +53,8 @@ xhttp.onreadystatechange = function () {
                 this.parentNode.parentNode.removeChild(this.parentNode);
                 deleteTodo(todoID, todoText)
             });
+
+            li.appendChild(checkbox)
             li.appendChild(deleteButton);
             ul.appendChild(li);
         }
@@ -97,6 +129,45 @@ function todoAjax(id) {
     xhttp2.setRequestHeader("x-api-key", "8b8930-acc2e9-511974-b5061e-5ad11e");
     xhttp2.send(JSON.stringify(data));
 }
+
+
+function checkTodo(checkId, checkStatus) {
+    // Setting variable for form input (get from HTML form)
+    console.log(checkStatus)
+    var data = {
+        completed: checkStatus
+    }
+
+    // Initalize AJAX Request
+    var xhttp2 = new XMLHttpRequest();
+
+    // Response handler
+    xhttp2.onreadystatechange = function () {
+
+        // Wait for readyState = 4 & 200 response
+        if (this.readyState == 4 && this.status == 200) {
+
+            // parse JSON response
+            var todo = JSON.parse(this.responseText);
+
+            console.log(todo);
+
+        } else if (this.readyState == 4) {
+
+            // this.status !== 200, error from server
+            console.log(this.responseText);
+
+        }
+    };
+
+    xhttp2.open("PUT", "https://cse204.work/todos/" + checkId, true);
+
+    xhttp2.setRequestHeader("Content-type", "application/json");
+    xhttp2.setRequestHeader("x-api-key", "8b8930-acc2e9-511974-b5061e-5ad11e");
+    xhttp2.send(JSON.stringify(data));
+}
+
+
 
 function deleteTodo(deleteId, deleteTodo) {
     console.log("inside the delete todo function")
