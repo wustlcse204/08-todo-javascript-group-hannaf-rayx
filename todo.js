@@ -1,4 +1,3 @@
-
 //get todo list
 var xhttp = new XMLHttpRequest();
 
@@ -70,6 +69,7 @@ xhttp.send();
 //https://stackoverflow.com/questions/20673959/how-to-add-new-li-to-ul-onclick-with-javascript
 function todoAjax(id) {
     var value = document.getElementById(id).value;
+    
     //alert(value);
 
     // Setting variable for form input (get from HTML form)
@@ -141,6 +141,8 @@ function todoAjax(id) {
 
             //li.setAttribute("id", "element4");
             ul.appendChild(li);
+            
+           //document.getElementById('add-todo').innerHTML = "";
             alert("Your message has been added.");
 
 
@@ -151,6 +153,8 @@ function todoAjax(id) {
 
         }
     };
+
+    document.getElementById(id).value = "";
 
     xhttp2.open("POST", "https://cse204.work/todos", true);
 
@@ -206,7 +210,7 @@ function deleteTodo(deleteId, deleteTodo) {
         text: deleteTodo
     }
 
-    var id = deleteId;
+    //var id = deleteId;
 
     // Initalize AJAX Request
     var xhttp2 = new XMLHttpRequest();
