@@ -23,9 +23,12 @@ xhttp.onreadystatechange = function () {
             //check the checkbox 
             if (checkStatus) {
                 checkbox.checked = true
+                //document.getElementById(todos[i].id).style.textDecoration = 'line-through'
+                li.style.setProperty('text-decoration', 'line-through')
             }
             else {
                 checkbox.checked = false
+                li.style.setProperty('text-decoration', 'none')
             }
             checkbox.addEventListener("click", function (event) {
                 console.log(checkStatus)
@@ -69,7 +72,7 @@ xhttp.send();
 //https://stackoverflow.com/questions/20673959/how-to-add-new-li-to-ul-onclick-with-javascript
 function todoAjax(id) {
     var value = document.getElementById(id).value;
-    
+
     //alert(value);
 
     // Setting variable for form input (get from HTML form)
@@ -141,8 +144,8 @@ function todoAjax(id) {
 
             //li.setAttribute("id", "element4");
             ul.appendChild(li);
-            
-           //document.getElementById('add-todo').innerHTML = "";
+
+            //document.getElementById('add-todo').innerHTML = "";
             alert("Your message has been added.");
 
 
@@ -169,6 +172,18 @@ function checkTodo(checkId, checkStatus) {
     console.log(checkStatus)
     var data = {
         completed: checkStatus
+    }
+
+    var li = document.getElementById(checkId)
+
+    if (checkStatus) {
+        //checkbox.checked = true
+        //document.getElementById(todos[i].id).style.textDecoration = 'line-through'
+        li.style.setProperty('text-decoration', 'line-through')
+    }
+    else {
+        //checkbox.checked = false
+        li.style.setProperty('text-decoration', 'none')
     }
 
     // Initalize AJAX Request
