@@ -258,3 +258,10 @@ function deleteTodo(deleteId, deleteTodo) {
 }
 
 
+$(document).keyup(function(event) {
+    if (event.which === 13) {
+        todoAjax('add-todo');
+    }
+});
+
+
