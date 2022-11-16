@@ -8,7 +8,7 @@ xhttp.onreadystatechange = function () {
         for (var i = todos.length - 1; i >= 0; i--) {
             var ul = document.getElementById("todo-list");
             var li = document.createElement("li");
-            li.appendChild(document.createTextNode(todos[i].text));
+            
             li.setAttribute("id", todos[i].id); // added line
 
             let todoID = todos[i].id
@@ -44,6 +44,8 @@ xhttp.onreadystatechange = function () {
             });
             //todos[i].completed = checkStatus
 
+        
+
 
 
             //added delete button
@@ -57,6 +59,8 @@ xhttp.onreadystatechange = function () {
             });
 
             li.appendChild(checkbox)
+            //append text
+            li.appendChild(document.createTextNode(todos[i].text));
             li.appendChild(deleteButton);
             ul.appendChild(li);
         }
@@ -96,7 +100,7 @@ function todoAjax(id) {
             console.log(todo);
             var ul = document.getElementById("todo-list");
             var li = document.createElement("li");
-            li.appendChild(document.createTextNode(todo.text));
+            // li.appendChild(document.createTextNode(todo.text));
             li.setAttribute("id", todo.id); // added line
             //added delete button
             var deleteButton = document.createElement("button");
@@ -140,6 +144,8 @@ function todoAjax(id) {
 
 
             li.appendChild(checkbox)
+            li.appendChild(document.createTextNode(todo.text));
+
             li.appendChild(deleteButton);
 
             //li.setAttribute("id", "element4");
